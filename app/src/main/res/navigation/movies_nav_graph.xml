@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movies_nav_graph"
+    app:startDestination="@id/browseMoviesFragment">
+
+    <fragment
+        android:id="@+id/browseMoviesFragment"
+        android:name="com.example.entertainmain.ui.movie.fragments.BrowseMoviesFragment"
+        android:label="BrowseMoviesFragment" >
+        <action
+            android:id="@+id/action_browseMoviesFragment_to_movieDetailActivity"
+            app:destination="@id/movieDetailActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteMoviesFragment"
+        android:name="com.example.entertainmain.ui.movie.fragments.FavoriteMoviesFragment"
+        android:label="FavoriteMoviesFragment" >
+        <action
+            android:id="@+id/action_favoriteMoviesFragment_to_movieDetailActivity"
+            app:destination="@id/movieDetailActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/watchListMoviesFragment"
+        android:name="com.example.entertainmain.ui.movie.fragments.WatchListMoviesFragment"
+        android:label="WatchListMoviesFragment" >
+        <action
+            android:id="@+id/action_watchListMoviesFragment_to_movieDetailActivity"
+            app:destination="@id/movieDetailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/movieDetailActivity"
+        android:name="com.example.entertainmain.ui.movie.MovieDetailActivity"
+        android:label="activity_movie_detail"
+        tools:layout="@layout/activity_movie_detail" />
+</navigation>

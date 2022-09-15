@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupSources">
+        <item
+            android:id="@+id/mainMovieFragment"
+            android:title="@string/movies"
+            android:checked="true"
+            android:icon="@drawable/ic_baseline_movie_24"
+            />
+        <item android:id="@+id/mainAnimeFragment"
+            android:title="@string/anime"
+            android:icon="@drawable/ic_baseline_anchor_24"
+            />
+    </group>
+    <item android:id="@+id/miChangeTheme"
+        android:icon="@drawable/ic_baseline_color_lens_24"
+        android:title="@string/change_theme"
+        />
+</menu>

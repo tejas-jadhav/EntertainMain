@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="20dp">
+
+    <TextView
+        android:id="@+id/tvMovieTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="6dp"
+        android:textColor="@color/dark_gray"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Hey this is some sample text here is how are you and what are you doing" />
+
+    <ImageView
+        android:id="@+id/ivImdbLogo"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:src="@drawable/imdb"
+        app:layout_constraintBottom_toBottomOf="@id/ratingBarDetail"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ratingBarDetail" />
+
+    <TextView
+        android:id="@+id/tvImdbRating"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:paddingBottom="2dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ivImdbLogo"
+        app:layout_constraintLeft_toRightOf="@id/ivImdbLogo"
+        app:layout_constraintRight_toLeftOf="@id/ratingBarDetail"
+        app:layout_constraintTop_toTopOf="@id/ivImdbLogo"
+        tools:text="9.2/10" />
+
+    <RatingBar
+        android:id="@+id/ratingBarDetail"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:isIndicator="true"
+        android:progressTint="@color/golden"
+        android:rating="3.5"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:secondaryProgressTint="@color/golden"
+        android:stepSize="0.1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvMovieTitle" />
+
+
+    <TextView
+        android:id="@+id/tvPlotHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/plot"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ratingBarDetail" />
+
+    <TextView
+        android:id="@+id/tvPlotText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPlotHeading"
+        tools:text="Hello this is some sample movie description and how the hell are you all doing this are just random words Idk what am I typing its just for the sake of testing" />
+
+    <TextView
+        android:id="@+id/tvGenreHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/genres"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPlotText" />
+
+    <HorizontalScrollView
+        android:id="@+id/hsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGenreHeading">
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true" />
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/tvCastHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/cast"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hsv" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCastDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCastHeading"
+        tools:listitem="@layout/item_image_and_name" />
+
+    <ProgressBar
+        android:id="@+id/pbForCast"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/rvCastDetails"
+        app:layout_constraintLeft_toLeftOf="@id/rvCastDetails"
+        app:layout_constraintRight_toRightOf="@id/rvCastDetails"
+        app:layout_constraintTop_toTopOf="@id/rvCastDetails" />
+
+    <TextView
+        android:id="@+id/tvNoConnection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_connection"
+        app:layout_constraintBottom_toBottomOf="@id/rvCastDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rvCastDetails" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

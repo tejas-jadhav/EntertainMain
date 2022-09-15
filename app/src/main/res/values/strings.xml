@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Entertain Main</string>
+    <string name="browse">Browse</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="watch_list">Watch List</string>
+    <string name="movies">Movies</string>
+    <string name="watch_enjoy">Watch. Enjoy.</string>
+    <string name="anime">Anime</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="nav_open">Opening Navigation Drawer</string>
+    <string name="nav_close">Closing Navigation Drawer</string>
+    <string name="loading">Loading…</string>
+
+    <string name="trending_movies">Trending this week 🔥</string>
+    <string name="popular_movies">Popular Movies 🍿</string>
+    <string name="top_rated_movies">Top Rated Movies 🌟</string>
+    <string name="plot">Plot</string>
+    <string name="genres">Genres</string>
+    <string name="cast">Cast</string>
+    <string name="no_favorites_msg">No favorites found !</string>
+    <string name="completed">Completed</string>
+    <string name="caught_up">You are Caught Up !</string>
+    <string name="nothing_watched">Completed movies will appear here</string>
+    <string name="movie_not_found">Movie not found !</string>
+    <string name="no_connection">No connection</string>
+</resources>
