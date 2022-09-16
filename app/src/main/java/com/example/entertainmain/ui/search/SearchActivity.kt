@@ -1,7 +1,6 @@
 package com.example.entertainmain.ui.search
 
 import android.app.SearchManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +32,7 @@ import kotlinx.coroutines.launch
 class SearchActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivitySearchBinding
     private lateinit var mSearchView: SearchView
+    private lateinit var previousQuery: String
     private lateinit var searchQuery: String
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var searchViewModel: SearchViewModel
@@ -65,41 +65,50 @@ class SearchActivity : AppCompatActivity() {
         mBinding.rvSearchList.apply {
             adapter = searchAdapter
             layoutManager = LinearLayoutManager(this@SearchActivity)
+            addOnScrollListener(onSearchRecyclerViewScrollListener)
         }
         searchAdapter.setOnSearchResultClickListener { movie ->
             val detailsActivityIntent = Intent(this, MovieDetailActivity::class.java)
             detailsActivityIntent.putExtra(MovieDetailActivity.MOVIE_KEY, movie)
             startActivity(detailsActivityIntent)
         }
+
     }
 
     private fun observeSearchResults() {
         searchViewModel.searchResult.observe(this) { moviesListResource ->
-            Log.d(
-                TAG,
-                "observeSearchResults: In response handler with data ${moviesListResource.toString()}"
-            )
             when (moviesListResource) {
                 is Resource.Success -> {
                     mBinding.pbSearching.visibility = View.GONE
                     mBinding.tvNotFound.visibility = View.GONE
+                    isLoading = false
+                    if (previousQuery != searchQuery) {
+                        isLastPage = false
+                    }
+                    if (moviesListResource.data?.next == null) {
+                        isLastPage = true
+                    }
                     moviesListResource.data?.movies?.let {
-                        searchAdapter.differ.submitList(it)
+                        searchAdapter.differ.submitList(it.toList())
                         if (it.isEmpty()) {
                             mBinding.tvNotFound.visibility = View.VISIBLE
                             mBinding.tvNotFound.setText(R.string.movie_not_found)
+                            isLastPage = true
                         }
                     }
                 }
                 is Resource.Loading -> {
+                    isLastPage = false
                     mBinding.pbSearching.visibility = View.VISIBLE
                     mBinding.tvNotFound.visibility = View.GONE
+                    isLoading = true
                 }
                 is Resource.Error -> {
                     Log.d(TAG, "observeSearchResults: ${moviesListResource.message.toString()}")
                     mBinding.pbSearching.visibility = View.GONE
                     mBinding.tvNotFound.visibility = View.VISIBLE
                     mBinding.tvNotFound.text = moviesListResource.message
+                    isLoading = false
                 }
             }
 
@@ -177,7 +186,11 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun performSearch() {
-        searchViewModel.searchMovieByTitle(searchQuery)
+        if (!isLoading) {
+            isLoading = true
+            previousQuery = searchQuery
+            searchViewModel.searchMovieByTitle(searchQuery)
+        }
     }
 
 

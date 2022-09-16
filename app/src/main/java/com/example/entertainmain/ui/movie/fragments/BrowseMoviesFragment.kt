@@ -116,12 +116,15 @@ class BrowseMoviesFragment : BaseMoviesFragment(R.layout.fragment_browse_movies)
                     response.data?.let { moviesResponse ->
                         topRatedMoviesAdapter.differ.submitList(moviesResponse.movies.toList())
                     }
+                    isTopRatedMoviesLoading = false
                 }
                 is Resource.Loading -> {
+                    isTopRatedMoviesLoading = true
                     mBinding.rvTopRated.scrollProgressBar.visibility = View.VISIBLE
                 }
                 is Resource.Error -> {
                     mBinding.rvTopRated.scrollProgressBar.visibility = View.GONE
+                    isTopRatedMoviesLoading = false
                     Log.e(TAG, "observeTopRatedMovies: ${response.message}")
                 }
             }
